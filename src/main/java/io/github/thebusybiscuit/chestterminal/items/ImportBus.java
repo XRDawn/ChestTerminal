@@ -25,7 +25,7 @@ public class ImportBus extends SlimefunItem {
     public ImportBus(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
-        new BlockMenuPreset(getId(), "&3CT Import Bus") {
+        new BlockMenuPreset(getId(), "&3CT输入终端") {
 
             @Override
             public void init() {
@@ -35,14 +35,14 @@ public class ImportBus extends SlimefunItem {
             @Override
             public void newInstance(BlockMenu menu, Block b) {
                 if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "filter-type") == null || BlockStorage.getLocationInfo(b.getLocation(), "filter-type").equals("whitelist")) {
-                    menu.replaceExistingItem(23, new CustomItem(Material.WHITE_WOOL, "&7Type: &fWhitelist", "", "&e> Click to change it to Blacklist"));
+                    menu.replaceExistingItem(23, new CustomItem(Material.WHITE_WOOL, "&7类型: &f白名单", "", "&e> 点击切换到黑名单"));
                     menu.addMenuClickHandler(23, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-type", "blacklist");
                         newInstance(menu, b);
                         return false;
                     });
                 } else {
-                    menu.replaceExistingItem(23, new CustomItem(Material.BLACK_WOOL, "&7Type: &8Blacklist", "", "&e> Click to change it to Whitelist"));
+                    menu.replaceExistingItem(23, new CustomItem(Material.BLACK_WOOL, "&7类型: &8黑名单", "", "&e> 点击切换到白名单t"));
                     menu.addMenuClickHandler(23, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-type", "whitelist");
                         newInstance(menu, b);
@@ -51,14 +51,14 @@ public class ImportBus extends SlimefunItem {
                 }
 
                 if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "filter-durability") == null || BlockStorage.getLocationInfo(b.getLocation(), "filter-durability").equals("false")) {
-                    menu.replaceExistingItem(41, new CustomItem(Material.STONE_SWORD, "&7Include Sub-IDs/Durability: &4\u2718", "", "&e> Click to toggle whether the Durability has to match"));
+                    menu.replaceExistingItem(41, new CustomItem(Material.STONE_SWORD, "&7匹配NBT/耐久度: &4\u2718", "", "&e> 点击切换是否匹配NBT/耐久度"));
                     menu.addMenuClickHandler(41, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-durability", "true");
                         newInstance(menu, b);
                         return false;
                     });
                 } else {
-                    menu.replaceExistingItem(41, new CustomItem(Material.GOLDEN_SWORD, "&7Include Sub-IDs/Durability: &2\u2714", "", "&e> Click to toggle whether the Durability has to match"));
+                    menu.replaceExistingItem(41, new CustomItem(Material.GOLDEN_SWORD, "&7匹配NBT/耐久度: &2\u2714", "", "&e> 点击切换是否匹配NBT/耐久度"));
                     menu.addMenuClickHandler(41, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-durability", "false");
                         newInstance(menu, b);
@@ -67,14 +67,14 @@ public class ImportBus extends SlimefunItem {
                 }
 
                 if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "filter-lore") == null || BlockStorage.getLocationInfo(b.getLocation(), "filter-lore").equals("true")) {
-                    menu.replaceExistingItem(32, new CustomItem(Material.MAP, "&7Include Lore: &2\u2714", "", "&e> Click to toggle whether the Lore has to match"));
+                    menu.replaceExistingItem(32, new CustomItem(Material.MAP, "&7匹配名字(lore): &2\u2714", "", "&e> 点击切换是否匹配名字(lore)"));
                     menu.addMenuClickHandler(32, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-lore", "false");
                         newInstance(menu, b);
                         return false;
                     });
                 } else {
-                    menu.replaceExistingItem(32, new CustomItem(Material.MAP, "&7Include Lore: &4\u2718", "", "&e> Click to toggle whether the Lore has to match"));
+                    menu.replaceExistingItem(32, new CustomItem(Material.MAP, "&7匹配名字(lore): &4\u2718", "", "&e> 点击切换是否匹配名字(lore)"));
                     menu.addMenuClickHandler(32, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "filter-lore", "true");
                         newInstance(menu, b);
@@ -124,7 +124,7 @@ public class ImportBus extends SlimefunItem {
         preset.addItem(25, new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, " "), click);
         preset.addItem(26, new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, " "), click);
 
-        preset.addItem(2, new CustomItem(Material.PAPER, "&3Items", "", "&bPut in all Items you want to", "&bblacklist/whitelist"), click);
+        preset.addItem(2, new CustomItem(Material.PAPER, "&3个物品", "", "&b放入你要传输的物品", "&b黑名单/白名单"), click);
     }
 
     public int[] getInputSlots() {

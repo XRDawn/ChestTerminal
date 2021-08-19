@@ -33,7 +33,7 @@ public class AccessTerminal extends SimpleSlimefunItem<BlockTicker> {
     public AccessTerminal(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
 
-        new BlockMenuPreset(getId(), "&3CT Access Terminal") {
+        new BlockMenuPreset(getId(), "&3CT连接终端") {
 
             @Override
             public void init() {
@@ -122,7 +122,7 @@ public class AccessTerminal extends SimpleSlimefunItem<BlockTicker> {
     public BlockTicker getItemHandler() {
         return new BlockTicker() {
 
-            private final ItemStack item = new CustomItem(Material.BARRIER, "&4No Cargo Net connected!");
+            private final ItemStack item = new CustomItem(Material.BARRIER, "&4没有连接货物网络!");
             private final MenuClickHandler click = (p, slot, stack, action) -> false;
 
             @Override

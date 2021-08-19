@@ -45,8 +45,8 @@ public abstract class WirelessTerminal extends SimpleSlimefunItem<ItemUseHandler
                 Block b = e.getClickedBlock().get();
 
                 if (e.getSlimefunBlock().get() instanceof AccessTerminal) {
-                    lore.set(0, ChatColors.color("&8\u21E8 &7Linked to: &8") + b.getWorld().getName() + " X: " + b.getX() + " Y: " + b.getY() + " Z: " + b.getZ());
-                    p.sendMessage(ChatColors.color("&bLink established!"));
+                    lore.set(0, ChatColors.color("&8\u21E8 &7链接到: &8") + b.getWorld().getName() + " X: " + b.getX() + " Y: " + b.getY() + " Z: " + b.getZ());
+                    p.sendMessage(ChatColors.color("&b链接已建立!"));
                     im.setLore(lore);
                     stack.setItemMeta(im);
                     p.getInventory().setItemInMainHand(stack);
@@ -62,16 +62,16 @@ public abstract class WirelessTerminal extends SimpleSlimefunItem<ItemUseHandler
     }
 
     private void openRemoteTerminal(Player p, ItemStack stack, String loc, int range) {
-        if (loc.equals(ChatColors.color("&8\u21E8 &7Linked to: &cNowhere"))) {
-            p.sendMessage(ChatColors.color("&4Failed &c- This Device has not been linked to a Chest Terminal!"));
+        if (loc.equals(ChatColors.color("&8\u21E8 &7链接到: &c无"))) {
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 此设备尚未链接到CT终端!"));
             return;
         }
 
-        loc = loc.replace(ChatColors.color("&8\u21E8 &7Linked to: &8"), "");
+        loc = loc.replace(ChatColors.color("&8\u21E8 &7链接到: &8"), "");
         World world = Bukkit.getWorld(loc.split(" X: ")[0]);
 
         if (world == null) {
-            p.sendMessage(ChatColors.color("&4Failed &c- The Chest Terminal that this Device has been linked to no longer exists!"));
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 此设备链接的CT终端不存在!"));
             return;
         }
 
@@ -83,27 +83,27 @@ public abstract class WirelessTerminal extends SimpleSlimefunItem<ItemUseHandler
 
         // Support for protection plugins (fixes #45)
         if (!SlimefunPlugin.getProtectionManager().hasPermission(p, block.getLocation(), ProtectableAction.INTERACT_BLOCK)) {
-            p.sendMessage(ChatColors.color("&4You are not permitted to access this terminal in that area!"));
+            p.sendMessage(ChatColors.color("&4您不允许接入该区域的CT终端!"));
             return;
         }
 
         if (!BlockStorage.check(block, "CHEST_TERMINAL")) {
-            p.sendMessage(ChatColors.color("&4Failed &c- The Chest Terminal that this Device has been linked to no longer exists!"));
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 此设备链接的CT终端不存在!"));
             return;
         }
 
         float charge = getItemCharge(stack);
         if (charge < 0.5F) {
-            p.sendMessage(ChatColors.color("&4Failed &c- You are out of Energy!"));
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 你没有足够的电量!"));
             return;
         }
 
         if (range > 0 && !world.getUID().equals(p.getWorld().getUID())) {
-            p.sendMessage(ChatColors.color("&4Failed &c- You are out of Range!"));
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 你超出了指定范围!"));
             return;
         }
         if (range > 0 && block.getLocation().distance(p.getLocation()) > range) {
-            p.sendMessage(ChatColors.color("&4Failed &c- You are out of Range!"));
+            p.sendMessage(ChatColors.color("&4连接失败 &c- 你超出了指定范围!"));
             return;
         }
 

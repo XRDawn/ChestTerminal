@@ -49,7 +49,7 @@ public class MilkyQuartz implements GEOResource {
 
     @Override
     public String getName() {
-        return "Milky Quartz";
+        return "钟乳石英";
     }
 
     @Override
